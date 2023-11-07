@@ -1,5 +1,5 @@
-let MAX_BATTERY_COUNT = 3;
-let MAX_BULB_COUNT = 1;
+const MAX_BATTERY_COUNT = 3;
+const MAX_BULB_COUNT = 1;
 class Flashlight {
   isOn: boolean;
   batteriesCount: number;
@@ -11,22 +11,19 @@ class Flashlight {
       this.bulbCount = bulbCount
   }
   addBattery() {
-    if (this.batteriesCount === 1) {
+    if (this.batteriesCount === 3) {
       alert("Can't fit another battery in the socket.")
-    } else if (this.isOn === false && MAX_BATTERY_COUNT > 0) {
+    } else if (this.isOn === false) {
       this.batteriesCount++
-      MAX_BATTERY_COUNT--
       alert("Loading batteries, please wait...")
       alert("Battery has been loaded.")
-    } else if (MAX_BATTERY_COUNT === 0) {
-			alert ("There is no battery to change.")
     } else {
       alert("Turn off your flashlight to proceed.")
     }
   }
 
   removeBattery() {
-    if (this.batteriesCount === 1) {
+    if (this.batteriesCount <= 3) {
       this.batteriesCount--
       alert("Battery has been removed.")
     } else {
@@ -37,13 +34,10 @@ class Flashlight {
   addBulb() {
     if (this.bulbCount === 1) {
       alert("Bulb socket is not clear.")
-    } else if (this.isOn === false && MAX_BULB_COUNT > 0) {
+    } else if (this.isOn === false) {
       this.bulbCount++
-      MAX_BULB_COUNT--
       alert("Changing bulb, please wait...")
       alert("Bulb has been changed.")
-    } else if (MAX_BULB_COUNT === 0) {
-			alert ("There is no bulb to change.")
     } else {
       alert("Turn off your flashlight to proceed.")
     }
