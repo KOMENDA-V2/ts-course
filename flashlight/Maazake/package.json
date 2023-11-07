@@ -1,0 +1,17 @@
+{
+	"scripts": {
+		"dev": "nodemon index.ts",
+		"start": "ts-node index.ts"
+	},
+	"devDependencies": {
+		"@types/lodash": "^4.14.200",
+		"@types/node": "^20.8.10",
+		"nodemon": "^3.0.1",
+		"ts-node": "^10.9.1"
+	},
+	"dependencies": {
+		"deep-copy-ts": "^0.5.4",
+		"loadash": "^1.0.0",
+		"lodash": "^4.17.21"
+	}
+}
