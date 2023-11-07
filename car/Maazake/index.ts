@@ -1,13 +1,13 @@
 class Car {
 	constructor(
-		public brand: string = 'Toyota',
-		public model: string = 'Camry',
-		public year: number = 2022,
+		public brand: string,
+		public model: string,
+		public year: number,
 		public isRunning: boolean = false,
 		public fuelLevel: number = 0
 	) {}
 	startCar() {
-		if (this.isRunning === false && this.fuelLevel > 0) {
+		if (!this.isRunning && this.fuelLevel > 0) {
 			this.isRunning = true
 			console.log('Włączono samochód')
 		} else if (this.isRunning === true) {
@@ -18,7 +18,7 @@ class Car {
 	}
 
 	stopCar() {
-		if (this.isRunning === true) {
+		if (this.isRunning) {
 			this.isRunning = false
 			console.log('Wyłączono samochód')
 		} else {
@@ -32,18 +32,18 @@ class Car {
 	}
 }
 
-const toyotaC = new Car()
+const toyotaC = new Car('Toyota', 'Camry', 2022)
 
 toyotaC.addFuel(10)
 toyotaC.startCar()
 // toyotaC.stopCar()
 
-function driveCar(distance: number) {
-	if (toyotaC.isRunning === true && toyotaC.fuelLevel > 0) {
+function driveCar(distance: number, car: Car) {
+	if (car.isRunning && car.fuelLevel > 0) {
 		const lKm = distance / 2
-		if (toyotaC.fuelLevel >= lKm) {
-			toyotaC.fuelLevel -= lKm
-			console.log(`Samochód przejechał ${distance}km i zostało mu ${toyotaC.fuelLevel} paliwa`)
+		if (car.fuelLevel >= lKm) {
+			car.fuelLevel -= lKm
+			console.log(`${car.brand} ${car.model} przebył ${distance}km zostawiając ${car.fuelLevel}L paliwa w baku`)
 		} else {
 			console.log('Nie ma wystarczająco paliwa')
 		}
@@ -52,4 +52,4 @@ function driveCar(distance: number) {
 	}
 }
 
-driveCar(10)
+driveCar(10, toyotaC)
