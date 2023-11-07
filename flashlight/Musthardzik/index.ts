@@ -59,7 +59,7 @@ let militaryLight = new Flashlight(false, 1, 1)
 
 let condition = false
 while (!condition) {
-  let choice = prompt("Co chcesz zrobić?\n 1.Włączy latarkę \n 2.Wyłączy latarkę \n 3.Zmieni baterię\n\n\nStatus latarki: " + militaryLight.isOn + "\nIlość baterii: " + militaryLight.batteriesCount + "\nIlość żarówek: " + militaryLight.bulbCount)
+  let choice = prompt("Co chcesz zrobić?\n 1.Włączyć latarkę \n 2.Wyłączyć latarkę \n 3.Zmienić baterię \n 4.Zmienić żarówkę\n\n\nStatus latarki: " + militaryLight.isOn + "\nIlość baterii: " + militaryLight.batteriesCount + "\nIlość żarówek: " + militaryLight.bulbCount)
   switch (choice) {
     case "1":
       militaryLight.turnOn();
@@ -70,6 +70,8 @@ while (!condition) {
     case "3":
       militaryLight.addBattery();
       break;
+    case "4":
+      militaryLight.addBulb();
     default:
       condition = true;
       break;
