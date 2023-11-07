@@ -7,11 +7,11 @@ class Flashlight {
 
   constructor(isOn: boolean, batteriesCount: number, bulbCount: number) {
     this.isOn = isOn,
-      this.batteriesCount = batteriesCount,
-      this.bulbCount = bulbCount
+    this.batteriesCount = batteriesCount,
+    this.bulbCount = bulbCount
   }
   addBattery() {
-    if (this.batteriesCount === 3) {
+    if (this.batteriesCount === MAX_BATTERY_COUNT) {
       alert("Can't fit another battery in the socket.")
     } else if (this.isOn === false) {
       this.batteriesCount++
@@ -23,7 +23,7 @@ class Flashlight {
   }
 
   removeBattery() {
-    if (this.batteriesCount <= 3) {
+    if (this.batteriesCount <= MAX_BATTERY_COUNT) {
       this.batteriesCount--
       alert("Battery has been removed.")
     } else {
@@ -32,7 +32,7 @@ class Flashlight {
   }
 
   addBulb() {
-    if (this.bulbCount === 1) {
+    if (this.bulbCount === MAX_BULB_COUNT) {
       alert("Bulb socket is not clear.")
     } else if (this.isOn === false) {
       this.bulbCount++
@@ -44,7 +44,7 @@ class Flashlight {
   }
 
   removeBulb() {
-    if (this.bulbCount === 1) {
+    if (this.bulbCount === MAX_BULB_COUNT) {
       this.bulbCount--
       alert("Bulb has been removed from the socket.")
     } else {
