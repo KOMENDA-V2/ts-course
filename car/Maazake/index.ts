@@ -28,12 +28,28 @@ class Car {
 
 	addFuel(amount: number) {
 		this.fuelLevel += amount
-		console.log(`Dodano ${this.fuelLevel} paliwa`);
+		console.log(`Dodano ${this.fuelLevel} paliwa`)
 	}
 }
 
-const toyotaC = new Car ()
+const toyotaC = new Car()
 
-toyotaC.addFuel(2)
+toyotaC.addFuel(10)
 toyotaC.startCar()
-toyotaC.stopCar()
+// toyotaC.stopCar()
+
+function driveCar(distance: number) {
+	if (toyotaC.isRunning === true && toyotaC.fuelLevel > 0) {
+		const lKm = distance / 2
+		if (toyotaC.fuelLevel >= lKm) {
+			toyotaC.fuelLevel -= lKm
+			console.log(`Samochód przejechał ${distance}km i zostało mu ${toyotaC.fuelLevel} paliwa`)
+		} else {
+			console.log('Nie ma wystarczająco paliwa')
+		}
+	} else {
+		console.log('Najpierw włącz samochód lub dolej paliwa żeby gdzieś jechać')
+	}
+}
+
+driveCar(10)
