@@ -13,13 +13,22 @@ class Car {
     if (this.fuelLevel > 1 && this.isRunning === false) {
       this.isRunning = true;
       alert("Engine has been turned on.")
-    } else {
+    } else if (this.fuelLevel === 0) {
+      alert("Fuel tank is empty. Check fuel level.")
+   } else if (this.isRunning === true) {
+      alert("Engine is already on.")
+   } else {
       alert("Something is wrong. Engine can't be turned on. Check fuel and fluids status, or visit local mechanic.")
     }
   }
 	
   stopCar() {
-  
+    if(this.isRunning === true) {
+      this.isRunning = false;
+      alert("Engine has been turned off.")
+    } else {
+      alert("Engine is already off.")
+    }
   }
   
   fuelStatus() {
