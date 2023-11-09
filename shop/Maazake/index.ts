@@ -28,6 +28,16 @@ class Shop {
 	addProductToStock(product: Product) {
 		this.stock.push(product)
 	}
+	addQuantityToStock(name: string, quantity: number) {
+		let product = this.stock.find(product => product.name === name)
+
+		if (product) {
+			product.quantity += quantity
+			console.log(`Pomyślnie dodano ${name} x ${quantity} do magazynu sklepu`)
+		} else {
+			console.log(`${name} nie ma nawet w magazynie sklepu`)
+		}
+	}
 	createShoppingCart(): ShoppingCart {
 		return new ShoppingCart()
 	}
@@ -71,9 +81,10 @@ walmart.addProductToStock(new Product('mleko', 4, 5))
 walmart.addProductToStock(new Product('chleb', 2, 5))
 walmart.addProductToStock(new Product('energy drink', 6, 3))
 walmart.addProductToStock(new Product('jabłko', 1, 10))
+walmart.addQuantityToStock('jabłko', 30)
 
 let cart = walmart.createShoppingCart()
-walmart.addProductToCart(cart, 'jabłko', 10)
+walmart.addProductToCart(cart, 'jabłko', 20)
 walmart.addProductToCart(cart, 'gruszka', 20)
 walmart.addProductToCart(cart, 'chleb', 3)
 walmart.removeProductFromCart(cart, 'jabłko', 5)
