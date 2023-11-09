@@ -3,8 +3,8 @@ class Product {
 }
 
 class ShoppingCart {
-	private items: Product[] = []
-	private totalPrice: number = 0
+	public items: Product[] = []
+	public totalPrice: number = 0
 	// constructor() {}
 	addProduct(product: Product) {
 		this.items.push(product)
@@ -17,7 +17,7 @@ class ShoppingCart {
 	getDetails() {
 		this.items.forEach(item => console.log(`${item.name} | ${item.price}zł | ${item.quantity}sztuk`))
 		if (this.items.length <= 0) {
-			console.log('Koszyk jest pusty');
+			console.log('Koszyk jest pusty')
 		}
 	}
 }
@@ -46,6 +46,18 @@ class Shop {
 			}
 		}
 	}
+	removeProductFromCart(shoppingCart: ShoppingCart, name: string, quantity: number) {
+		let product = shoppingCart.items.find(item => item.name === name)
+		if (!product || product.quantity === 0) {
+			console.log(`Nie można usunąć ${name} x ${quantity} z koszyka.`)
+		} else {
+			if (product.quantity >= quantity) {
+				product.quantity -= quantity
+				shoppingCart.totalPrice -= product.price * quantity
+				console.log(`Pomyślnie usunięto ${name} x ${quantity} z koszyka`)
+			}
+		}
+	}
 	getTotalOfCart(shoppingCart: ShoppingCart) {
 		shoppingCart.getTotalPrice()
 	}
@@ -64,6 +76,7 @@ let cart = walmart.createShoppingCart()
 walmart.addProductToCart(cart, 'jabłko', 10)
 walmart.addProductToCart(cart, 'gruszka', 20)
 walmart.addProductToCart(cart, 'chleb', 3)
+walmart.removeProductFromCart(cart, 'jabłko', 5)
 
 walmart.displayCartDetails(cart)
 walmart.getTotalOfCart(cart)
