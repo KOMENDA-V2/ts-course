@@ -73,25 +73,3 @@ function driveCar(distance: number, car: Car) {
 sportCar.addFuel(10);
 sportCar.startCar();
 driveCar(100, sportCar)
-
-/* let propert = false
-while (!propert) {
-  let input = prompt("Click to proceed!\n 1.Start engine\n 2.Stop engine\n 3.Pour fuel into tank\n 4.Check car properties")
-  switch (input) {
-    case "1":
-      sportCar.startCar();
-      break;
-    case "2":
-      sportCar.stopCar();
-      break;
-    case "3":
-      sportCar.addFuel();
-      break;
-    case "4":
-      sportCar.getProperties();
-      break;
-    default:
-      propert = true;
-      break;
-  }
-} */
