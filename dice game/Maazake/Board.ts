@@ -4,21 +4,23 @@ import { Pawn } from './Pawn'
 import { WinnerWasCalled } from './WinnerWasCalled'
 
 export class Board {
-	private maxPosition: number = 16
 	pawns: Pawn[]
 	dice: Dice
 	winner: Pawn | undefined
 	turnsCounter: number
 
-	constructor() {
+	constructor(
+		private maxPosition: number,
+		diceSides: number
+	) {
 		this.turnsCounter = 0
 		this.pawns = []
-		this.dice = new Dice()
+		this.dice = new Dice(diceSides)
 	}
 
 	performTurn(): void {
 		this.turnsCounter++
-		Log.info(`Turn ${this.turnsCounter}`)
+		Log.info(`!--- Turn ${this.turnsCounter} ---!`)
 
 		for (let i = 0; i < this.pawns.length; i++) {
 			const rollResult = this.dice.roll()
@@ -35,14 +37,13 @@ export class Board {
 	}
 
 	addPlayers() {
-		// const playersAmount = Math.floor(Math.random() * 8) + 3
 		const selectedPlayers: Pawn[] = []
 
 		for (let i = 0; i < Math.floor(Math.random() * 8) + 3; i++) {
 			const randomIndex = Math.floor(Math.random() * this.pawns.length)
 			const selectedPlayer = this.pawns.splice(randomIndex, 1)[0]
 			selectedPlayers.push(selectedPlayer)
-			Log.info(`Player ${i+1}: ${selectedPlayer.name} joined the gameeeeee`)
+			Log.info(`Player ${i + 1}: ${selectedPlayer.name} joined the game!`)
 		}
 		this.pawns = selectedPlayers
 	}

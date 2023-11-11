@@ -1,9 +1,14 @@
-import {Log} from "./Log";
+import { Log } from './Log'
+// import { Board } from './Board'
 
 export class Dice {
-    roll(): number {
-      const result = Math.floor(Math.random() * 6) + 1;
-      Log.info(`Dice roll: ${result}`);
-      return result;
-    }
+  private sides: number;
+	constructor(sides: number) {
+    this.sides = sides
   }
+	roll(): number {
+		const result = Math.floor(Math.random() * this.sides) + 1
+		Log.info(`Dice roll: ${result}`)
+		return result
+	}
+}
