@@ -9,10 +9,7 @@ export class Board {
 	winner: Pawn | undefined
 	turnsCounter: number
 
-	constructor(
-		private maxPosition: number,
-		diceSides: number
-	) {
+	constructor(private maxPosition: number, diceSides: number, private maxTurns: number) {
 		this.turnsCounter = 0
 		this.pawns = []
 		this.dice = new Dice(diceSides)
@@ -31,6 +28,10 @@ export class Board {
 
 			if (pawn.position >= this.maxPosition) {
 				this.winner = pawn
+				throw new WinnerWasCalled()
+			}
+			if (this.turnsCounter > this.maxTurns) {
+				Log.info(`Max turns was set to ${this.maxTurns}, there is no winner and game can no longer be continued.`);
 				throw new WinnerWasCalled()
 			}
 		}

@@ -2,7 +2,6 @@ import { Log } from './Log'
 
 export class Pawn {
 	position: number
-	push: any
 
 	constructor(public name: string) {
 		this.name = name
