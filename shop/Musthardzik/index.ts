@@ -9,32 +9,48 @@ class Product {
 class ShoppingCart {
   public items: Product[] = [];
   public totalPrice: number = 0;
-  constructor () {}
+  constructor() {}
 
-    addItem(product: Product) {
-      this.items.push(product);
-      this.totalPrice += product.price * product.quantity
-      console.log(`x ${product.quantity} ${product.name} has been added to your cart!`)
-    }
+  addProduct(product: Product) {
+    this.items.push(product);
+    this.totalPrice += product.price * product.quantity
+    console.log(`${product.quantity} products of ${product.name} has been added.`)
+  }
 
-    removeItem(product: Product) {
-      this.items.push(product);
-      this.totalPrice -= product.price * product.quantity;
-      console.log(`x ${product.quantity} ${product.name} has been removed from your cart!`)
-    }
+  getTotalPrice() {
+    console.log(`Total price of all products in cart is ${this.totalPrice}$`)
+  }
 
-    getItemList() {
-      
+  getDetails() {
+    if (this.items.length === 0) {
+      console.log(`Cart is empty.`)
     }
+    this.items.forEach(product => console.log(`x${product.quantity} of ${product.name} equals ${product.price}$`))
+  }
+
 }
 
 class Shop {
-    constructor(
-    ) {}
+  public stock: Product[];
+  constructor() {}
 
+  addProductToStock(products: Product) {
+    this.stock.push(products)
+  }
+
+  createShoppingCart() {
     
-}
+  }
 
-let milk = new Product("Milk", 2.99, 30);
-let eggs = new Product("Eggs", 9.99, 10);
-let chocolate = new Product("Chocolate", 12.99, 20);
+  addProductToCart() {
+
+  }
+
+  getTotalOfCart(shoppingCart: ShoppingCart) {
+    shoppingCart.getTotalPrice();
+  }
+
+  displayCartDetails(shoppingCart: ShoppingCart) {
+    shoppingCart.getDetails();
+  }
+}
