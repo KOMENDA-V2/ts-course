@@ -1,10 +1,8 @@
 import { Log } from './Log'
-import { Dice } from './Dice'
 import { Pawn } from './Pawn'
 import { Board } from './Board'
 
-const board = new Board(50, 11, 2) //(maxPosition, dice sides, turns)
-// board.dice = new Dice(10)
+const board = new Board(30, 3, 10) //(maxPosition, dice sides, turns)
 board.pawns.push(new Pawn('Luke Skywalker'))
 board.pawns.push(new Pawn('Darth Vader'))
 board.pawns.push(new Pawn('Anakin Skywalker'))
