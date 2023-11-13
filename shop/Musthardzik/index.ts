@@ -48,9 +48,7 @@ class Shop {
       console.log("There is no such product in the store");
     } else {
       if (product.quantity >= 0) {
-        let sameProduct = {
-          ...product
-        };
+        let sameProduct = {...product};
         sameProduct.quantity = quantity;
         shoppingCart.addProduct(sameProduct);
         product.quantity -= quantity;
