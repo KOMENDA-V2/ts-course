@@ -1,0 +1,1 @@
+class WinnerWasCalled extends Error {}
