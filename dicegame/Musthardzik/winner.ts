@@ -1,1 +1,1 @@
-class WinnerWasCalled extends Error {}
+export class WinnerWasCalled extends Error {}

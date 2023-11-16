@@ -1,8 +1,11 @@
-const board = new Board();
-board.dice = new Dice();
-board.pawns.push(new Pawn("Luke Skywalker"));
-board.pawns.push(new Pawn("Darth Vader"));
+import { Log } from "./log";
+import { Board } from "./board";
+import { Pawn } from "./pawn";
+import { Dice } from "./dice";
+import { PlayerGenerator } from "./playerGenerator";
 
+let players = PlayerGenerator.generate();
+const board = new Board(10, players);
 try {
   while (true) {
     board.performTurn();

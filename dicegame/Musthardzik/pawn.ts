@@ -1,4 +1,6 @@
-class Pawn {
+import { Log } from "./log";
+
+export class Pawn {
     position: number;
   
     constructor(public name: string) {
