@@ -2,18 +2,18 @@ import { Log } from "./log";
 import { WinnerWasCalled } from "./winner";
 import { Dice } from "./dice";
 import { Pawn } from "./pawn";
+import { board } from "./index";
 
 export class Board {
-    private maxPosition: number = 100;
     dice: Dice;
     winner: Pawn | undefined;
     turnsCounter: number;
   
-    constructor(private endOfTurns: number, private pawns: Pawn[]) {
+    constructor(private endOfTurns: number, private pawns: Pawn[], private maxPosition: number) {
       this.turnsCounter = 0;
-      this.dice = new Dice();
+      this.dice = new Dice(12);
     }
-  
+    
     performTurn(): void {
       this.turnsCounter++;
       if (this.turnsCounter > this.endOfTurns) {
@@ -26,7 +26,7 @@ export class Board {
         const rollResult = this.dice.roll();
         const pawn = this.pawns[i];
         pawn.position += rollResult;
-  
+
         Log.info(`${pawn.name} new position: ${pawn.position}`);
   
         if (pawn.position >= this.maxPosition) {

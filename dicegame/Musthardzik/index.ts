@@ -5,7 +5,7 @@ import { Dice } from "./dice";
 import { PlayerGenerator } from "./playerGenerator";
 
 let players = PlayerGenerator.generate();
-const board = new Board(10, players);
+export const board = new Board(10, players, 100);
 try {
   while (true) {
     board.performTurn();
