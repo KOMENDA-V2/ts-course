@@ -1,6 +1,7 @@
 import { Bicycle } from './entities/bicycle'
 import { Car } from './entities/car'
 import { PrivilegedCar } from './entities/privileged-cars'
+import { TeacherCar } from './entities/teacher-car'
 import Entityable from './interfaces/entity.interface'
 import Log from './log'
 import QueueGenerator from './queue-generator'
@@ -12,18 +13,16 @@ class ParkingLot {
 	private readonly carsParkingLimit: number = 100
 	private readonly bicyclesParkingLimit: number = 10
 	private readonly blacklistedPlates: string[] = QueueGenerator.GetBlacklistedPlates(3000)
-
 	private bank: number = 0
-	checkIfCanEnter(entity: Entityable): boolean {
+
+	checkIfCanEnter(entity: Entityable, hour: number): boolean {
 		if (entity instanceof Car && this.blacklistedPlates.includes(entity.getPlate())) {
 			return false
 		}
-		 return entity.canEnter()
+		return entity.canEnter()
 	}
 
 	letIn(entity: Entityable, hour: string): void {
-		this.entitiesOnProperty.push(entity)
-
 		if (entity instanceof Car) {
 			if (this.carsOnProperty < this.carsParkingLimit) {
 				if (!(entity instanceof PrivilegedCar)) {
@@ -33,6 +32,8 @@ class ParkingLot {
 				if (entity.shouldPay()) {
 					this.bank += entity.pay()
 				}
+			} else {
+				return
 			}
 		}
 
@@ -43,7 +44,9 @@ class ParkingLot {
 			this.bikesOnProperty++
 		}
 
-		Log.info(`${hour} - ${entity.identify()} let in.`)
+		this.entitiesOnProperty.push(entity)
+
+		Log.info(`${hour} <-- ${entity.identify()} let in.`)
 	}
 
 	countCars(): number {
@@ -52,6 +55,52 @@ class ParkingLot {
 
 	getSumOfBank(): number {
 		return this.bank
+	}
+
+	getEntitiesOnProperty(): number {
+		return this.entitiesOnProperty.length
+	}
+
+	releaseAllVehicles(): void {
+
+		for (const entity of this.entitiesOnProperty) {
+			if (entity instanceof TeacherCar) {
+				continue
+			}
+
+			if (entity instanceof Car) {
+				if (!(entity instanceof PrivilegedCar)) {
+					this.carsOnProperty--
+				}
+			}
+
+			if (entity instanceof Bicycle) {
+				this.bikesOnProperty--
+			}
+
+			this.entitiesOnProperty = this.entitiesOnProperty.filter((_, index) => index !== 0)
+
+
+			console.log(`[23:00] --> ${entity.identify()} let out`)
+		}
+	}
+
+	releaseVehicle(hour: string): void {
+		const entity = this.entitiesOnProperty.shift()
+
+		if (entity) {
+			if (entity instanceof Car) {
+				if (!(entity instanceof PrivilegedCar)) {
+					this.carsOnProperty--
+				}
+			}
+
+			if (entity instanceof Bicycle) {
+				this.bikesOnProperty--
+			}
+
+			console.log(`${hour} --> ${entity.identify()} let out`)
+		}
 	}
 }
 
